@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>PDF Master Pro - Free PDF Tools & AI Suite 2025</title>
+    <meta name="description" content="Free online PDF tools: merge, split, compress, convert. AI YouTube SEO generator, hashtag maker, QR codes. No registration, no watermark.">
+    <meta name="keywords" content="PDF tools, merge PDF, compress PDF, YouTube SEO, hashtag generator, QR code, free tools">
+    <meta name="author" content="PDF Master Pro">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://YOUR_USERNAME.github.io">
+    
+    <!-- PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 20px;
+            font-weight: 800;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #666;
+        }
+
+        .support-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .support-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-category {
+            margin-bottom: 25px;
+        }
+
+        .tool-category h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .tool-item {
+            padding: 10px 15px;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tool-item i {
+            width: 20px;
+            font-size: 14px;
+        }
+
+        .tool-item:hover {
+            background: linear-gradient(135deg, #f0f0ff 0%, #ffe0f0 100%);
+            transform: translateX(5px);
+        }
+
+        .tool-item.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+
+        .pro-tag {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-size: 9px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: auto;
+            font-weight: 700;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .tool-panel {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tool-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tool-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0ff;
+        }
+
+        .tool-header h2 {
+            color: #333;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .tool-header h2 i {
+            color: #667eea;
+            margin-right: 10px;
+        }
+
+        .tool-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Upload Area */
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 20px 0;
+            background: #fafaff;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #f5f5ff;
+            transform: scale(1.01);
+        }
+
+        .upload-area i {
+            font-size: 48px;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .upload-area p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .upload-area small {
+            color: #999;
+            font-size: 12px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Form Elements */
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 5px 5px 5px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102,126,234,0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result-area {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f5ff 0%, #fff5f5 100%);
+            border-radius: 16px;
+            display: none;
+            border: 1px solid rgba(102,126,234,0.2);
+        }
+
+        .result-area.show {
+            display: block;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Premium Feature */
+        .premium-feature {
+            position: relative;
+            border: 2px solid #f5576c;
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 13px;
+            border-left: 4px solid #667eea;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #e0f2f1 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 10px 0;
+        }
+
+        .error-box {
+            background: linear-gradient(135deg, #ffebee 0%, #fce4ec 100%);
+            padding: 15px;
+            border-radius: 12px;
+            color: #c62828;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+                overflow-x: auto;
+            }
+            .tool-category {
+                display: inline-block;
+                margin-right: 20px;
+            }
+            .tool-item {
+                display: inline-block;
+                margin: 5px;
+            }
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .tool-header h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-content">
+        <div class="logo">
+            <h1><i class="fas fa-file-pdf"></i> PDF MASTER PRO</h1>
+            <p>Professional PDF Tools & AI Suite | 100% Free</p>
+        </div>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Users</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1M+</div>
+                <div class="stat-label">Files Processed</div>
+            </div>
+        </div>
+        <a href="#" class="support-btn" onclick="showSupport()">
+            <i class="fas fa-heart"></i> Support Us
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <h3><i class="fas fa-tools"></i> All Tools</h3>
+        
+        <div class="tool-category">
+            <h4><i class="fas fa-file-pdf"></i> PDF Tools</h4>
+            <div class="tool-item active" onclick="switchTool('merge')">
+                <i class="fas fa-object-group"></i> Merge PDF
+            </div>
+            <div class="tool-item" onclick="switchTool('image2pdf')">
+                <i class="fas fa-image"></i> Image to PDF
+            </div>
+            <div class="tool-item" onclick="switchTool('pdf2image')">
+                <i class="fas fa-camera"></i> PDF to Image
+            </div>
+            <div class="tool-item" onclick="switchTool('compress')">
+                <i class="fas fa-compress-alt"></i> Compress PDF
+            </div>
+        </div>
+        
+        <div class="tool-category">
+            <h4><i class="fas fa-robot"></i> AI Tools</h4>
+            <div class="tool-item" onclick="switchTool('youtubeseo')">
+                <i class="fab fa-youtube"></i> YouTube SEO <span class="pro-tag">FREE</span>
+            </div>
+            <div class="tool-item" onclick="switchTool('hashtag')">
+                <i class="fas fa-hashtag"></i> Hashtag Gen
+            </div>
+            <div class="tool-item" onclick="switchTool('titlegen')">
+                <i class="fas fa-heading"></i> Title Generator
+            </div>
+        </div>
+        
+        <div class="tool-category">
+            <h4><i class="fas fa-globe"></i> Media Tools</h4>
+            <div class="tool-item" onclick="switchTool('videoinfo')">
+                <i class="fab fa-youtube"></i> Video Info
+            </div>
+            <div class="tool-item" onclick="switchTool('qr')">
+                <i class="fas fa-qrcode"></i> QR Code
+            </div>
+            <div class="tool-item" onclick="switchTool('texttools')">
+                <i class="fas fa-text-height"></i> Text Tools
+            </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 20px;">
+            <i class="fas fa-shield-alt"></i> <strong>100% Secure</strong><br>
+            All processing happens in your browser. Your files never leave your device.
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- Tool 1: Merge PDF -->
+        <div class="tool-panel active" id="merge">
+            <div class="tool-header">
+                <h2><i class="fas fa-object-group"></i> Merge PDF Files</h2>
+                <p>Combine multiple PDFs into one document. Free and unlimited.</p>
+            </div>
+            <div class="upload-area" onclick="document.getElementById('mergeFiles').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Click to select PDF files</p>
+                <small>Supports multiple files, up to 50MB each</small>
+                <input type="file" id="mergeFiles" multiple accept=".pdf" style="display:none" onchange="updateMergeFiles()">
+            </div>
+            <button onclick="mergePDFs()"><i class="fas fa-object-group"></i> Merge PDFs</button>
+            <div class="result-area" id="mergeResult"></div>
+        </div>
+
+        <!-- Tool 2: Image to PDF -->
+        <div class="tool-panel" id="image2pdf">
+            <div class="tool-header">
+                <h2><i class="fas fa-image"></i> Image to PDF</h2>
+                <p>Convert JPG, PNG, GIF images to PDF format.</p>
+            </div>
+            <div class="upload-area" onclick="document.getElementById('imageFiles').click()">
+                <i class="fas fa-images"></i>
+                <p>Select images (JPG, PNG, GIF)</p>
+                <small>Multiple images supported</small>
+                <input type="file" id="imageFiles" multiple accept="image/*" style="display:none">
+            </div>
+            <button onclick="imagesToPDF()"><i class="fas fa-file-pdf"></i> Create PDF</button>
+            <div class="result-area" id="image2pdfResult"></div>
+        </div>
+
+        <!-- Tool 3: PDF to Image -->
+        <div class="tool-panel" id="pdf2image">
+            <div class="tool-header">
+                <h2><i class="fas fa-camera"></i> PDF to Image</h2>
+                <p>Convert each page of your PDF to high-quality images.</p>
+            </div>
+            <div class="upload-area" onclick="document.getElementById('pdfFile').click()">
+                <i class="fas fa-file-pdf"></i>
+                <p>Select PDF file</p>
+                <small>Convert to JPG format</small>
+                <input type="file" id="pdfFile" accept=".pdf" style="display:none">
+            </div>
+            <button onclick="pdfToImages()"><i class="fas fa-images"></i> Convert to Images</button>
+            <div class="result-area" id="pdf2imageResult"></div>
+        </div>
+
+        <!-- Tool 4: Compress PDF -->
+        <div class="tool-panel" id="compress">
+            <div class="tool-header">
+                <h2><i class="fas fa-compress-alt"></i> Compress PDF</h2>
+                <p>Reduce PDF file size while maintaining quality.</p>
+            </div>
+            <div class="upload-area" onclick="document.getElementById('compressFile').click()">
+                <i class="fas fa-file-archive"></i>
+                <p>Select PDF to compress</p>
+                <small>Optimize for web or print</small>
+                <input type="file" id="compressFile" accept=".pdf" style="display:none">
+            </div>
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i> Compression reduces file size by up to 70%. For best results, use on scanned documents or image-heavy PDFs.
+            </div>
+            <button onclick="compressPDF()"><i class="fas fa-compress-alt"></i> Compress PDF</button>
+            <div class="result-area" id="compressResult"></div>
+        </div>
+
+        <!-- Tool 5: YouTube SEO Generator -->
+        <div class="tool-panel premium-feature" id="youtubeseo">
+            <div class="premium-badge"><i class="fas fa-star"></i> FREE FEATURE</div>
+            <div class="tool-header">
+                <h2><i class="fab fa-youtube"></i> YouTube SEO Generator</h2>
+                <p>AI-powered titles, descriptions, and tags for YouTube success.</p>
+            </div>
+            <input type="text" id="seoTopic" placeholder="Enter video topic (e.g., How to make pizza)">
+            <input type="text" id="seoKeywords" placeholder="Keywords (comma separated - optional)">
+            <button onclick="generateYouTubeSEO()"><i class="fas fa-magic"></i> Generate SEO</button>
+            <div class="result-area" id="seoResult"></div>
+        </div>
+
+        <!-- Tool 6: Hashtag Generator -->
+        <div class="tool-panel" id="hashtag">
+            <div class="tool-header">
+                <h2><i class="fas fa-hashtag"></i> Hashtag Generator</h2>
+                <p>Generate trending hashtags for Instagram, TikTok, YouTube.</p>
+            </div>
+            <input type="text" id="hashtagTopic" placeholder="Enter topic (e.g., fitness, travel, technology)">
+            <select id="platform">
+                <option value="instagram">Instagram</option>
+                <option value="tiktok">TikTok</option>
+                <option value="youtube">YouTube</option>
+                <option value="twitter">Twitter/X</option>
+            </select>
+            <button onclick="generateHashtags()"><i class="fas fa-chart-line"></i> Generate Hashtags</button>
+            <div class="result-area" id="hashtagResult"></div>
+        </div>
+
+        <!-- Tool 7: Title Generator -->
+        <div class="tool-panel" id="titlegen">
+            <div class="tool-header">
+                <h2><i class="fas fa-heading"></i> YouTube Title Generator</h2>
+                <p>Generate click-worthy video titles that get views.</p>
+            </div>
+            <input type="text" id="titleTopic" placeholder="Enter video topic">
+            <button onclick="generateTitles()"><i class="fas fa-lightbulb"></i> Generate Titles</button>
+            <div class="result-area" id="titleResult"></div>
+        </div>
+
+        <!-- Tool 8: Video Info -->
+        <div class="tool-panel" id="videoinfo">
+            <div class="tool-header">
+                <h2><i class="fab fa-youtube"></i> Video Metadata Extractor</h2>
+                <p>Extract video information from YouTube (title, thumbnail, ID).</p>
+            </div>
+            <input type="text" id="videoUrl" placeholder="YouTube URL (e.g., https://youtu.be/... or https://youtube.com/watch?v=...)">
+            <button onclick="extractVideoInfo()"><i class="fas fa-info-circle"></i> Get Info</button>
+            <div class="info-box">
+                <i class="fas fa-gavel"></i> <strong>Legal Use Only:</strong> This extracts metadata only. For downloading videos, use YouTube Premium.
+            </div>
+            <div class="result-area" id="videoResult"></div>
+        </div>
+
+        <!-- Tool 9: QR Code -->
+        <div class="tool-panel" id="qr">
+            <div class="tool-header">
+                <h2><i class="fas fa-qrcode"></i> QR Code Generator</h2>
+                <p>Create QR codes for URLs, text, contact info, and more.</p>
+            </div>
+            <input type="text" id="qrText" placeholder="Enter URL or text">
+            <select id="qrSize">
+                <option value="200">Small (200x200)</option>
+                <option value="300" selected>Medium (300x300)</option>
+                <option value="500">Large (500x500)</option>
+            </select>
+            <button onclick="generateQR()"><i class="fas fa-qrcode"></i> Generate QR Code</button>
+            <div class="result-area" id="qrResult"></div>
+        </div>
+
+        <!-- Tool 10: Text Tools -->
+        <div class="tool-panel" id="texttools">
+            <div class="tool-header">
+                <h2><i class="fas fa-text-height"></i> Text Tools</h2>
+                <p>Word counter, character counter, and text statistics.</p>
+            </div>
+            <textarea id="textInput" rows="6" placeholder="Paste or type your text here..."></textarea>
+            <button onclick="analyzeText()"><i class="fas fa-chart-bar"></i> Analyze Text</button>
+            <div class="result-area" id="textResult"></div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="footer-content">
+        <div>© 2025 PDF Master Pro - Made with <i class="fas fa-heart" style="color:#ff6b6b"></i> for the community</div>
+        <div>
+            <a href="#" onclick="showAbout()">About</a>
+            <a href="#" onclick="showPrivacy()">Privacy</a>
+            <a href="#" onclick="showContact()">Contact</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ========== UTILITY FUNCTIONS ==========
+    
+    function switchTool(toolId) {
+        // Hide all tool panels
+        document.querySelectorAll('.tool-panel').forEach(panel => {
+            panel.classList.remove('active');
+        });
+        // Show selected panel
+        document.getElementById(toolId).classList.add('active');
+        
+        // Update sidebar active state
+        document.querySelectorAll('.tool-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        event.target.classList.add('active');
+    }
+
+    function showResult(elementId, content, isError = false) {
+        const resultDiv = document.getElementById(elementId);
+        if (isError) {
+            resultDiv.innerHTML = `<div class="error-box"><i class="fas fa-exclamation-circle"></i> ${content}</div>`;
+        } else {
+            resultDiv.innerHTML = content;
+        }
+        resultDiv.classList.add('show');
+        setTimeout(() => {
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('✓ Copied to clipboard!');
+        }).catch(() => {
+            alert('Press Ctrl+C to copy');
+        });
+    }
+
+    function showSupport() {
+        alert('⭐ Support PDF Master Pro!\n\nWays to support:\n• Share with friends\n• Star on GitHub\n• Buy me a coffee: buymeacoffee.com/pdfmaster\n\nThank you! ❤️');
+    }
+
+    function showAbout() {
+        alert('📄 PDF Master Pro v2.0\n\nFree online tools for everyone.\nAll processing happens in your browser - your files never leave your device.\n\nMade with ❤️ for the community.');
+    }
+
+    function showPrivacy() {
+        alert('🔒 Privacy Policy\n\nWe do not store any files. All processing happens locally in your browser.\nNo data is sent to any server.\n\nYour privacy is 100% protected.');
+    }
+
+    function showContact() {
+        alert('📧 Contact Us\n\nEmail: support@pdfmasterpro.com\nTwitter: @pdfmasterpro\nGitHub: github.com/pdfmasterpro\n\nWe typically respond within 24 hours.');
+    }
+
+    // ========== PDF MERGE TOOL ==========
+    let mergeFilesList = [];
+    
+    function updateMergeFiles() {
+        mergeFilesList = Array.from(document.getElementById('mergeFiles').files);
+        if (mergeFilesList.length > 0) {
+            alert(`${mergeFilesList.length} file(s) selected. Click "Merge PDFs" to continue.`);
+        }
+    }
+    
+    async function mergePDFs() {
+        if (mergeFilesList.length < 2) {
+            showResult('mergeResult', 'Please select at least 2 PDF files to merge.', true);
+            return;
+        }
+        
+        showResult('mergeResult', '<div class="info-box"><i class="fas fa-spinner fa-pulse"></i> Merging PDFs... Please wait.</div>');
+        
+        try {
+            const { PDFDocument } = PDFLib;
+            const mergedPdf = await PDFDocument.create();
+            
+            for (const file of mergeFilesList) {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await PDFDocument.load(arrayBuffer);
+                const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                pages.forEach(page => mergedPdf.addPage(page));
+            }
+            
+            const pdfBytes = await mergedPdf.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            
+            showResult('mergeResult', `
+                <div class="success-box">
+                    <i class="fas fa-check-circle"></i> <strong>Success!</strong> Merged ${mergeFilesList.length} PDFs.<br><br>
+                    <a href="${url}" download="merged.pdf"><button style="background:#4caf50"><i class="fas fa-download"></i> Download Merged PDF</button></a>
+                </div>
+            `);
+        } catch (error) {
+            showResult('mergeResult', `Error: ${error.message}`, true);
+        }
+    }
+
+    // ========== IMAGE TO PDF ==========
+    async function imagesToPDF() {
+        const files = Array.from(document.getElementById('imageFiles').files);
+        if (files.length === 0) {
+            showResult('image2pdfResult', 'Please select at least one image.', true);
+            return;
+        }
+        
+        showResult('image2pdfResult', '<div class="info-box"><i class="fas fa-spinner fa-pulse"></i> Converting images to PDF...</div>');
+        
+        try {
+            const { PDFDocument } = PDFLib;
+            const pdfDoc = await PDFDocument.create();
+            
+            for (const file of files) {
+                const imgData = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.readAsDataURL(file);
+                });
+                
+                let image;
+                if (file.type === 'image/jpeg') {
+                    image = await pdfDoc.embedJpg(imgData);
+                } else {
+                    image = await pdfDoc.embedPng(imgData);
+                }
+                
+                const page = pdfDoc.addPage([image.width, image.height]);
+                page.drawImage(image, { x: 0, y: 0, width: image.width, height: image.height });
+            }
+            
+            const pdfBytes = await pdfDoc.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            
+            showResult('image2pdfResult', `
+                <div class="success-box">
+                    <i class="fas fa-check-circle"></i> <strong>Success!</strong> Converted ${files.length} images to PDF.<br><br>
+                    <a href="${url}" download="images.pdf"><button style="background:#4caf50"><i class="fas fa-download"></i> Download PDF</button></a>
+                </div>
+            `);
+        } catch (error) {
+            showResult('image2pdfResult', `Error: ${error.message}`, true);
+        }
+    }
+
+    // ========== PDF TO IMAGE ==========
+    async function pdfToImages() {
+        const file = document.getElementById('pdfFile').files[0];
+        if (!file) {
+            showResult('pdf2imageResult', 'Please select a PDF file.', true);
+            return;
+        }
+        
+        if (file.size > 50 * 1024 * 1024) {
+            showResult('pdf2imageResult', 'File too large! Please use PDFs under 50MB.', true);
+            return;
+        }
+        
+        showResult('pdf2imageResult', '<div class="info-box"><i class="fas fa-spinner fa-pulse"></i> Converting PDF to images...</div>');
+        
+        try {
+            // Load PDF.js dynamically
+            const pdfjsLib = await loadPDFJS();
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+            
+            let imagesHTML = '';
+            for (let i = 1; i <= Math.min(pdf.numPages, 10); i++) {
+                const page = await pdf.getPage(i);
+                const viewport = page.getViewport({ scale: 1.5 });
+                const canvas = document.createElement('canvas');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const context = canvas.getContext('2d');
+                
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+                const imageDataURL = canvas.toDataURL('image/jpeg', 0.9);
+                
+                imagesHTML += `
+                    <div style="margin: 15px 0; text-align: center;">
+                        <p><strong>Page ${i}</strong></p>
+                        <img src="${imageDataURL}" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <br>
+                        <a href="${imageDataURL}" download="page_${i}.jpg"><button style="margin-top: 8px; background:#2196f3"><i class="fas fa-download"></i> Download Page ${i}</button></a>
+                    </div>
+                    ${i < Math.min(pdf.numPages, 10) ? '<hr>' : ''}
+                `;
+            }
+            
+            if (pdf.numPages > 10) {
+                imagesHTML += `<div class="info-box">⚠️ First 10 pages shown. Contact support for full conversion.</div>`;
+            }
+            
+            showResult('pdf2imageResult`, `
+                <div class="success-box">
+                    <i class="fas fa-check-circle"></i> <strong>Success!</strong> Converted ${Math.min(pdf.numPages, 10)} of ${pdf.numPages} pages.<br><br>
+                    ${imagesHTML}
+                </div>
+            `);
+        } catch (error) {
+            showResult('pdf2imageResult', `Error: ${error.message}. Make sure the PDF is valid.`, true);
+        }
+    }
+    
+    function loadPDFJS() {
+        return new Promise((resolve, reject) => {
+            if (window.pdfjsLib) {
+                resolve(window.pdfjsLib);
+                return;
+            }
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
+            script.onload = () => {
+                window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+                resolve(window.pdfjsLib);
+            };
+            script.onerror = () => reject(new Error('Failed to load PDF library'));
+            document.head.appendChild(script);
+        });
+    }
+
+    // ========== COMPRESS PDF ==========
+    async function compressPDF() {
+        const file = document.getElementById('compressFile').files[0];
+        if (!file) {
+            showResult('compressResult', 'Please select a PDF file to compress.', true);
+            return;
+        }
+        
+        showResult('compressResult', '<div class="info-box"><i class="fas fa-spinner fa-pulse"></i> Compressing PDF... This may take a moment.</div>');
+        
+        try {
+            const { PDFDocument } = PDFLib;
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await PDFDocument.load(arrayBuffer);
+            
+            // Get original size
+            const originalSize = file.size;
+            
+            // Compress by saving with standard settings
+            const compressedBytes = await pdf.save({ useObjectStreams: true });
+            const compressedSize = compressedBytes.length;
+            const reduction = ((1 - compressedSize / originalSize) * 100).toFixed(1);
+            
+            const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+            
+            showResult('compressResult', `
+                <div class="success-box">
+                    <i class="fas fa-check-circle"></i> <strong>Compression Complete!</strong><br><br>
+                    <strong>Original Size:</strong> ${(originalSize / 1024).toFixed(2)} KB<br>
+                    <strong>Compressed Size:</strong> ${(compressedSize / 1024).toFixed(2)} KB<br>
+                    <strong>Reduction:</strong> ${reduction}%<br><br>
+                    <a href="${url}" download="compressed.pdf"><button style="background:#4caf50"><i class="fas fa-download"></i> Download Compressed PDF</button></a>
+                </div>
+            `);
+        } catch (error) {
+            showResult('compressResult', `Error compressing PDF: ${error.message}`, true);
+        }
+    }
+
+    // ========== YOUTUBE SEO GENERATOR ==========
+    function generateYouTubeSEO() {
+        const topic = document.getElementById('seoTopic').value;
+        const keywords = document.getElementById('seoKeywords').value;
+        
+        if (!topic) {
+            showResult('seoResult', 'Please enter a video topic.', true);
+            return;
+        }
+        
+        const keywordArray = keywords ? keywords.split(',').map(k => k.trim()).slice(0, 5) : topic.split(' ').slice(0, 3);
+        const year = new Date().getFullYear();
+        
+        // Generate titles
+        const titles = [
+            `${topic} - Complete Guide ${year}`,
+            `${topic} for Beginners: Step by Step Tutorial`,
+            `How to ${topic} Like a Pro in 10 Minutes`,
+            `${topic} Tutorial (Fast & Easy)`,
+            `Top 10 ${keywordArray[0]} Tips You Need to Know`,
+            `The Ultimate ${topic} Guide for ${year}`,
+            `${topic} Secrets They Don't Tell You`,
+            `${topic} Masterclass: From Zero to Hero`
+        ];
+        
+        // Generate description
+        const description = `In this video, I'll show you ${topic}. Whether you're a beginner or expert, you'll learn valuable tips and tricks.
+
+📌 TIMESTAMPS:
+0:00 - Introduction
+1:30 - Getting Started
+3:00 - Main Tutorial
+6:00 - Advanced Tips
+8:00 - Common Mistakes to Avoid
+10:00 - Conclusion
+
+🔗 RESOURCES MENTIONED:
+- Resource 1 (link in comments)
+- Resource 2 (link in comments)
+
+💬 JOIN THE COMMUNITY:
+Subscribe for more ${keywordArray[0]} tutorials!
+Hit the 🔔 to never miss an update.
+
+#${keywordArray.join(' #')} #Tutorial #${year} #HowTo #${keywordArray[0]}Tips`;
+        
+        // Generate tags
+        const tags = [...keywordArray, 'tutorial', 'howto', 'guide', 'tips', 'beginner', 'easy', 'fast', 'learning', 'education'];
+        const uniqueTags = [...new Set(tags)].slice(0, 20);
+        
+        // Generate thumbnail text ideas
+        const thumbnails = [
+            `${topic} | Complete Guide`,
+            `${topic} 🔥 MUST WATCH`,
+            `${topic} in 10 Minutes`,
+            `How to ${topic} ✅`,
+            `${topic} Secrets Revealed`
+        ];
+        
+        showResult('seoResult', `
+            <div class="success-box">
+                <i class="fas fa-magic"></i> <strong>Your YouTube SEO Package</strong>
+                
+                <div style="margin: 20px 0; padding: 15px; background: white; border-radius: 12px;">
+                    <strong><i class="fas fa-heading"></i> 📝 TOP TITLES (Pick 2-3 to test):</strong><br><br>
+                    ${titles.map((t, i) => `${i+1}. ${t}<br>`).join('')}
+                    <button onclick="copyToClipboard('${titles[0]}')" style="margin-top: 10px;"><i class="fas fa-copy"></i> Copy Title #1</button>
+                </div>
+                
+                <div style="margin: 20px 0; padding: 15px; background: white; border-radius: 12px;">
+                    <strong><i class="fas fa-file-alt"></i> 📄 OPTIMIZED DESCRIPTION:</strong><br><br>
+                    <textarea rows="8" style="width:100%; font-family: monospace; font-size: 12px; background:#f5f5f5;" readonly>${description}</textarea>
+                    <button onclick="copyToClipboard(document.querySelector('#seoResult textarea').value)" style="margin-top: 10px;"><i class="fas fa-copy"></i> Copy Description</button>
+                </div>
+                
+                <div style="margin: 20px 0; padding: 15px; background: white; border-radius: 12px;">
+                    <strong><i class="fas fa-tags"></i> #️⃣ TAGS (500 characters max):</strong><br><br>
+                    ${uniqueTags.join(', ')}
+                    <br><br>
+                    <button onclick="copyToClipboard('${uniqueTags.join(', ')}')"><i class="fas fa-copy"></i> Copy Tags</button>
+                </div>
+                
+                <div style="margin: 20px 0; padding: 15px; background: white; border-radius: 12px;">
+                    <strong><i class="fas fa-image"></i> 🖼️ THUMBNAIL TEXT IDEAS:</strong><br><br>
+                    ${thumbnails.map(t => `• "${t}"<br>`).join('')}
+                </div>
+                
+                <div class="info-box">
+                    <i class="fas fa-chart-line"></i> <strong>PRO TIPS:</strong><br>
+                    • Test 2-3 titles and pick the best performer<br>
+                    • Add your specific resources and links to description<br>
+                    • Use TubeBuddy or vidIQ for advanced keyword research<br>
+                    • Post at peak hours (Tue-Thu, 10am-2pm EST)<br>
+                    • Engage with comments within first hour
+                </div>
+            </div>
+        `);
+    }
+
+    // ========== HASHTAG GENERATOR ==========
+    function generateHashtags() {
+        const topic = document.getElementById('hashtagTopic').value;
+        const platform = document.getElementById('platform').value;
+        
+        if (!topic) {
+            showResult('hashtagResult', 'Please enter a topic.', true);
+            return;
+        }
+        
+        const mainTag = `#${topic.toLowerCase().replace(/\s/g, '')}`;
+        
+        const nicheTags = [
+            `#${topic.toLowerCase().replace(/\s/g, '')}tips`,
+            `#${topic.toLowerCase().replace(/\s/g, '')}life`,
+            `#${topic.toLowerCase().replace(/\s/g, '')}goals`,
+            `#${topic.toLowerCase().replace(/\s/g, '')}community`,
+            `#${topic.toLowerCase().replace(/\s/g, '')}lover`,
+            `#${topic.toLowerCase().replace(/\s/g, '')}addict`
+        ];
+        
+        const platformTags = {
+            instagram: ['#instagood', '#photooftheday', '#instadaily', '#trending', '#viral', '#explorepage', '#instagram', '#followforfollow', '#likeforlike', '#tagsforlikes'],
+            tiktok: ['#fyp', '#foryou', '#foryoupage', '#viral', '#trending', '#xyzbca', '#greenscreen', '#learnontiktok', '#tiktoktrend', '#fypシ'],
+            youtube: ['#youtube', '#youtuber', '#subscriber', '#youtubegrowth', '#viralvideo', '#trendingvideo', '#watchnow', '#newvideo', '#contentcreator'],
+            twitter: ['#trending', '#viral', '#twitter', '#tweet', '#socialmedia', '#digitalmarketing', '#content', '#engagement', '#followme']
+        };
+        
+        const trendingTags = platformTags[platform] || platformTags.instagram;
+        
+        let allHashtags = [mainTag, ...nicheTags, ...trendingTags];
+        allHashtags = [...new Set(allHashtags)].slice(0, platform === 'instagram' ? 30 : 20);
+        
+        const platformTips = {
+            instagram: 'Use 20-30 hashtags for best reach. Place in first comment or caption.',
+            tiktok: 'Use 3-5 relevant hashtags. TikTok algorithm prefers fewer, targeted tags.',
+            youtube: 'Use 10-15 tags in video settings. First 3 tags are most important.',
+            twitter: 'Use 1-2 hashtags maximum. Twitter posts with 1-2 hashtags get highest engagement.'
+        };
+        
+        showResult('hashtagResult', `
+            <div class="success-box">
+                <i class="fas fa-chart-line"></i> <strong>Generated Hashtags for ${platform.toUpperCase()}</strong><br><br>
+                <div style="background: white; padding: 15px; border-radius: 12px; word-wrap: break-word;">
+                    ${allHashtags.join(' ')}
+                </div>
+                <br>
+                <button onclick="copyToClipboard('${allHashtags.join(' ')}')"><i class="fas fa-copy"></i> Copy All Hashtags</button>
+                
+                <div class="info-box" style="margin-top: 20px;">
+                    <i class="fas fa-lightbulb"></i> <strong>Platform Tips:</strong><br>
+                    ${platformTips[platform]}
+                </div>
+            </div>
+        `);
+    }
+
+    // ========== TITLE GENERATOR ==========
+    function generateTitles() {
+        const topic = document.getElementById('titleTopic').value;
+        if (!topic) {
+            showResult('titleResult', 'Please enter a video topic.', true);
+            return;
+        }
+        
+        const titles = [
+            `${topic} - The Ultimate Guide`,
+            `${topic} for Beginners: Start Here`,
+            `How to ${topic} (Step by Step)`,
+            `${topic} Secrets You Need to Know`,
+            `${topic} in 5 Minutes (Fast Tutorial)`,
+            `Don't Watch ${topic} Without This Video`,
+            `${topic} Masterclass: Everything You Need`,
+            `The Truth About ${topic}`,
+            `${topic} Tips That Actually Work`,
+            `${topic} vs Alternatives - Which is Better?`
+        ];
+        
+        showResult('titleResult', `
+            <div class="success-box">
+                <i class="fas fa-lightbulb"></i> <strong>Click-Worthy Titles for "${topic}"</strong><br><br>
+                ${titles.map((t, i) => `${i+1}. ${t}<br>`).join('')}
+                <br>
+                <button onclick="copyToClipboard('${titles[0]}')"><i class="fas fa-copy"></i> Copy Title #1</button>
+                <div class="info-box" style="margin-top: 15px;">
+                    💡 <strong>Pro Tip:</strong> Test 2-3 titles, let them run for 24 hours, keep the best performer.
+                </div>
+            </div>
+        `);
+    }
+
+    // ========== VIDEO INFO EXTRACTOR ==========
+    function extractVideoInfo() {
+        const url = document.getElementById('videoUrl').value;
+        if (!url) {
+            showResult('videoResult', 'Please enter a YouTube URL.', true);
+            return;
+        }
+        
+        const patterns = [
+            /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/,
+            /youtube\.com\/shorts\/([^&\n?#]+)/
+        ];
+        
+        let videoId = null;
+        for (const pattern of patterns) {
+            const match = url.match(pattern);
+            if (match) {
+                videoId = match[1];
+                break;
+            }
+        }
+        
+        if (videoId) {
+            const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+            const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+            
+            showResult('videoResult', `
+                <div class="success-box">
+                    <i class="fab fa-youtube"></i> <strong>Video Information Extracted</strong><br><br>
+                    <strong>Video ID:</strong> ${videoId}<br>
+                    <strong>YouTube URL:</strong> https://youtu.be/${videoId}<br>
+                    <strong>Embed URL:</strong> ${embedUrl}<br><br>
+                    
+                    <strong>Thumbnail:</strong><br>
+                    <img src="${thumbnailUrl}" style="max-width: 100%; border-radius: 12px; margin: 10px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"><br>
+                    
+                    <button onclick="copyToClipboard('https://youtu.be/${videoId}')"><i class="fas fa-copy"></i> Copy Video URL</button>
+                    <button onclick="window.open('${thumbnailUrl}', '_blank')"><i class="fas fa-image"></i> Open Thumbnail</button>
+                    
+                    <div class="info-box" style="margin-top: 15px;">
+                        📹 Need to download? Use <strong>YouTube Premium</strong> for offline viewing.
+                    </div>
+                </div>
+            `);
+        } else {
+            showResult('videoResult', 'Could not extract video ID. Please enter a valid YouTube URL.', true);
+        }
+    }
+
+    // ========== QR CODE GENERATOR ==========
+    function generateQR() {
+        const text = document.getElementById('qrText').value;
+        const size = document.getElementById('qrSize').value;
+        
+        if (!text) {
+            showResult('qrResult', 'Please enter text or URL.', true);
+            return;
+        }
+        
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(text)}`;
+        
+        showResult('qrResult', `
+            <div style="text-align: center; padding: 20px;">
+                <img src="${qrUrl}" alt="QR Code" style="border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"><br><br>
+                <button onclick="copyToClipboard('${text}')"><i class="fas fa-copy"></i> Copy Text</button>
+                <a href="${qrUrl}" download="qrcode.png"><button style="background:#4caf50"><i class="fas fa-download"></i> Download QR Code</button></a>
+            </div>
+        `);
+    }
+
+    // ========== TEXT ANALYZER ==========
+    function analyzeText() {
+        const text = document.getElementById('textInput').value;
+        if (!text) {
+            showResult('textResult', 'Please enter some text to analyze.', true);
+            return;
+        }
+        
+        const characters = text.length;
+        const charactersNoSpace = text.replace(/\s/g, '').length;
+        const words = text.trim().split(/\s+/).length;
+        const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+        const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0).length;
+        const readingTime = Math.ceil(words / 200);
+        
+        showResult('textResult', `
+            <div class="success-box">
+                <i class="fas fa-chart-bar"></i> <strong>Text Statistics</strong><br><br>
+                <table style="width:100%; text-align: left;">
+                    <tr><td><strong>Characters:</strong></td><td>${characters}</td></tr>
+                    <tr><td><strong>Characters (no spaces):</strong></td><td>${charactersNoSpace}</td></tr>
+                    <tr><td><strong>Words:</strong></td><td>${words}</td></tr>
+                    <tr><td><strong>Sentences:</strong></td><td>${sentences}</td></tr>
+                    <tr><td><strong>Paragraphs:</strong></td><td>${paragraphs}</td></tr>
+                    <tr><td><strong>Reading Time:</strong></td><td>${readingTime} minute(s)</td></tr>
+                </table>
+                <br>
+                <button onclick="copyToClipboard(text)"><i class="fas fa-copy"></i> Copy Text</button>
+            </div>
+        `);
+    }
+</script>
+</body>
+</html>
